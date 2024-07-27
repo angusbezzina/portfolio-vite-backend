@@ -1,0 +1,37 @@
+org: angusbezzina
+app: portfolio-backend
+service: portfolio-backend
+
+useDotenv: true
+
+provider:
+  name: aws
+  runtime: nodejs20.x
+  httpApi:
+    cors: true
+
+plugins:
+  - serverless-offline
+
+functions:
+  getDownloadUrl:
+    handler: dist/functions/getDownloadUrl.getDownloadUrl
+    events:
+      - httpApi:
+          path: /download
+          method: post
+  createAirtableRecord:
+    handler: dist/functions/createAirtableRecord.createAirtableRecord
+    events:
+      - httpApi:
+          path: /airtable
+          method: post
+    environment:
+      AIRTABLE_API_KEY: "${env:AIRTABLE_API_KEY}"
+      AIRTABLE_BASE: "${env:AIRTABLE_BASE}"
+      AIRTABLE_TABLE: "${env:AIRTABLE_TABLE}"
+
+custom:
+  serverless-offline:
+    babelOptions:
+      presets: ["env"]

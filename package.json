@@ -1,0 +1,24 @@
+{
+  "name": "portfolio-backend",
+  "version": "1.0.0",
+  "description": "Backend functions for portfolio site.",
+  "main": "handler.js",
+  "scripts": {
+    "build": "tsc",
+    "dev": "tsc && serverless offline",
+    "deploy": "tsc && serverless deploy",
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "author": "Angus Bezzina",
+  "license": "ISC",
+  "devDependencies": {
+    "@types/aws-lambda": "^8.10.142",
+    "@types/node": "^20.14.12",
+    "serverless-offline": "^13.6.0",
+    "ts-node": "^10.9.2",
+    "typescript": "^5.5.4"
+  },
+  "dependencies": {
+    "airtable": "^0.12.2"
+  }
+}
