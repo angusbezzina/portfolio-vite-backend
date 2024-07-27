@@ -19,6 +19,7 @@
     "typescript": "^5.5.4"
   },
   "dependencies": {
-    "airtable": "^0.12.2"
+    "airtable": "^0.12.2",
+    "aws-sdk": "^2.1664.0"
   }
 }

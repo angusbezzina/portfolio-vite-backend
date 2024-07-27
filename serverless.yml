@@ -6,6 +6,7 @@ useDotenv: true
 
 provider:
   name: aws
+  region: ap-southeast-2
   runtime: nodejs20.x
   httpApi:
     cors: true
@@ -14,14 +15,19 @@ plugins:
   - serverless-offline
 
 functions:
-  getDownloadUrl:
-    handler: dist/functions/getDownloadUrl.getDownloadUrl
+  generatePresignedUrl:
+    handler: dist/generatePresignedCVUrl.handler
     events:
       - httpApi:
           path: /download
           method: post
+    environment:
+      S3_ACCESS_KEY_ID: "${env:S3_ACCESS_KEY_ID}"
+      S3_SECRET_ACCESS_KEY: "${env:S3_SECRET_ACCESS_KEY}"
+      S3_REGION: "${env:S3_REGION}"
+      S3_BUCKET_NAME: "${env:S3_BUCKET_NAME}"
   createAirtableRecord:
-    handler: dist/functions/createAirtableRecord.createAirtableRecord
+    handler: dist/createAirtableRecord.handler
     events:
       - httpApi:
           path: /airtable

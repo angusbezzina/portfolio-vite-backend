@@ -1,10 +1,7 @@
 import Airtable from "airtable";
 import type { APIGatewayProxyHandler } from "aws-lambda";
 
-export const createAirtableRecord: APIGatewayProxyHandler = async (
-  event,
-  _context
-) => {
+export const handler: APIGatewayProxyHandler = async (event, _context) => {
   const AIRTABLE = {
     API_KEY: process.env.AIRTABLE_API_KEY || "",
     BASE: process.env.AIRTABLE_BASE || "",
@@ -30,18 +27,16 @@ export const createAirtableRecord: APIGatewayProxyHandler = async (
 
     return {
       statusCode: 200,
-      body: JSON.stringify({
-        body: JSON.stringify({ success: true }),
-        headers: headers,
-      }),
+      headers,
+      body: JSON.stringify({ success: true }),
     };
   } catch (error) {
     console.error(error);
 
     return {
+      headers,
       statusCode: 400,
       body: JSON.stringify({ success: false }),
-      headers: headers,
     };
   }
 };
