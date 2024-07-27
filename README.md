@@ -25,4 +25,8 @@ Run the command `npm run dev`.
 
 Run the command `npm run deploy`.
 
-**NOTE** This uses `serverless deploy` under the hood to deploy the provisioned services.
+If this fails, you may need to run each of these steps manually, i.e.
+
+1. Run the command `npm run build`.
+2. If you are not logged in, run the command `serverless login`.
+3. Run the command `serverless deploy`.
