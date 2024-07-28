@@ -36,6 +36,16 @@ functions:
       AIRTABLE_API_KEY: "${env:AIRTABLE_API_KEY}"
       AIRTABLE_BASE: "${env:AIRTABLE_BASE}"
       AIRTABLE_TABLE: "${env:AIRTABLE_TABLE}"
+  chatbot:
+    handler: dist/chatbot.handler
+    events:
+      - httpApi:
+          path: /chatbot
+          method: post
+    environment:
+      LANGCHAIN_API_KEY: "${env:LANGCHAIN_API_KEY}"
+      LANGCHAIN_TRACING_V2: "${env:LANGCHAIN_TRACING_V2}"
+      OPENAI_API_KEY: "${env:OPENAI_API_KEY}"
 
 custom:
   serverless-offline:
