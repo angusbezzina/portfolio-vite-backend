@@ -1,4 +1,6 @@
+dist
 node_modules
 .serverless
+
 .env
-dist/
+.DS_Store
