@@ -1,6 +1,6 @@
 import { AIMessage, BaseMessage } from "@langchain/core/messages";
 import { DynamicStructuredTool } from "@langchain/core/tools";
-import { WebPDFLoader } from "@langchain/community/document_loaders/web/pdf";
+import { TextLoader } from "langchain/document_loaders/fs/text";
 import { PromptTemplate } from "@langchain/core/prompts";
 import { z } from "zod";
 import { ChatOpenAI } from "@langchain/openai";
@@ -14,7 +14,7 @@ import { ToolNode } from "@langchain/langgraph/prebuilt";
 import { APIGatewayProxyHandler } from "aws-lambda";
 
 const GPT_MODEL = "gpt-4o";
-const CV_URL = "https://angusbezzina.com/angus-bezzina-cv-2024.pdf";
+const CV_URL = "https://angusbezzina.com/angus-bezzina-cv-2024.docx";
 const LINKEDIN_URL = "https://www.linkedin.com/in/angus-bezzina";
 
 interface AgentState {
@@ -63,7 +63,7 @@ async function getContext(src: string) {
   try {
     const response = await fetch(src);
     const blob = await response.blob();
-    const loader = new WebPDFLoader(blob);
+    const loader = new TextLoader(blob);
     const docs = await loader.load();
     const content = docs.map(({ pageContent }) => pageContent).join(" ");
     const cleanedContent = content.replace(/\s+/g, " ").trim();
