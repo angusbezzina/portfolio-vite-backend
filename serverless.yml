@@ -14,10 +14,6 @@ provider:
 plugins:
   - serverless-offline
 
-package:
-  patterns:
-    - "!node_modules/**"
-
 functions:
   generatePresignedUrl:
     handler: dist/generatePresignedCVUrl.handler
